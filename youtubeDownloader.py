@@ -11,11 +11,11 @@ class YoutubeDownloader:
         :param filename: The name to save the video as. If not provided, the video title will be used.
         :param location: The location to save the video. If not provided, the current working directory will be used.
         """
+
+        if not os.path.exists(location):
+            os.makedirs(location)
+        
         file_path = os.path.join(location, filename) if filename else os.path.join(location, '%(title)s.%(ext)s')
-        if os.path.exists(file_path):
-            response = input(f"{file_path} already exists. Do you want to overwrite it? (y/n): ")
-            if response.lower() != 'y':
-                return
 
         ydl_opts = {
             'format': 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]',
@@ -32,11 +32,11 @@ class YoutubeDownloader:
         :param filename: The name to save the audio as. If not provided, the video title will be used.
         :param location: The location to save the audio. If not provided, the current working directory will be used.
         """
+
+        if not os.path.exists(location):
+            os.makedirs(location)
+
         file_path = os.path.join(location, filename) if filename else os.path.join(location, '%(title)s.mp3')
-        if os.path.exists(file_path):
-            response = input(f"{file_path} already exists. Do you want to overwrite it? (y/n): ")
-            if response.lower() != 'y':
-                return
 
         ydl_opts = {
             'format': 'bestaudio/best',
