@@ -15,7 +15,10 @@ class YoutubeDownloader:
         if not os.path.exists(location):
             os.makedirs(location)
         
-        file_path = os.path.join(location, filename) if filename else os.path.join(location, '%(title)s.%(ext)s')
+        if "playlist" in link:
+            file_path = os.path.join(location, '%(playlist_index)s-' + filename + '.mp4') if filename else os.path.join(location, '%(playlist_index)s-%(title)s.%(ext)s')
+        else:
+            file_path = os.path.join(location, filename + '.mp4') if filename else os.path.join(location, '%(title)s.%(ext)s')
 
         ydl_opts = {
             'format': 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]',
@@ -36,7 +39,10 @@ class YoutubeDownloader:
         if not os.path.exists(location):
             os.makedirs(location)
 
-        file_path = os.path.join(location, filename) if filename else os.path.join(location, '%(title)s.mp3')
+        if "playlist" in link:
+            file_path = os.path.join(location, '%(playlist_index)s-' + filename + '.mp3') if filename else os.path.join(location, '%(playlist_index)s-%(title)s.mp3')
+        else:
+            file_path = os.path.join(location, filename + '.mp3') if filename else os.path.join(location, '%(title)s.mp3')
 
         ydl_opts = {
             'format': 'bestaudio/best',
