@@ -1,4 +1,3 @@
-!pip install -U yt-dlp
 import os
 import yt_dlp as youtube_dl
 from typing import Optional
